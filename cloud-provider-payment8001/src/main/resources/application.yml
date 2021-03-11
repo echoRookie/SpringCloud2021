@@ -15,8 +15,11 @@ mybatis:
   mapperLocations: classpath:mapper/*.xml
   type-aliases-package: com.yangjun.springcloud.entities    # 所有Entity别名类所在包
 eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://eureka001.com:7001/eureka,http://eureka002.com:7002/eureka
+ client:
+   register-with-eureka: true
+   fetch-registry: true
+   service-url:
+    defaultZone: http://eureka001.com:7001/eureka,http://eureka002.com:7002/eureka
+ instance:
+   instance-id: payment8001
+   prefer-ip-address: true
