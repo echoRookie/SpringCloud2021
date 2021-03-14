@@ -17,6 +17,7 @@
         <module>cloud-provider-payment8004</module>
         <module>cloud-consumerzk-order82</module>
         <module>cloud-consumeropenfeign-order82</module>
+        <module>cloud-hystrix-payment8001</module>
     </modules>
     <packaging>pom</packaging>
     <!-- packaging pom 总工程-->
