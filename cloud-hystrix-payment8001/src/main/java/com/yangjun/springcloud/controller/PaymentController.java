@@ -1,5 +1,7 @@
 package com.yangjun.springcloud.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.yangjun.springcloud.service.PaymentService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +24,17 @@ public class PaymentController {
 
     @GetMapping("/payment/hystirx/getok/{id}")
     public String paymentInfoOk(@PathVariable("id") Integer id){
-        return paymentService.paymentInfoOk(id);
+        return paymentService.paymentInfoOk(id) + serverPort;
     }
 
-
+    @HystrixCommand(fallbackMethod = "fallBackTimeOut", commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value="3000")})
     @GetMapping("/payment/hystirx/gettimeout/{id}")
     public String paymentInfoTimeOut(@PathVariable("id") Integer id){
-       return paymentService.paymentInfoTimeOut(id);
+       return paymentService.paymentInfoTimeOut(id) + serverPort;
+    }
+
+    public String fallBackTimeOut(Integer id){
+        return "服务降级测试，等待时间3秒，线程sleep五秒" + serverPort;
     }
 }

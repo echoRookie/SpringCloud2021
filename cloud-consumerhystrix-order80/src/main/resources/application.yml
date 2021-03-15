@@ -1,0 +1,22 @@
+server:
+  port: 82
+spring:
+  application:
+    name: cloud-order-hystirx-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource            # 当前数据源操作类型
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mytest?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    password: 1234
+    username: root
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      #defaultZone: http://eureka001.com:7001/eureka,http://eureka002.com:7002/eureka
+      defaultZone: http://eureka001.com:7001/eureka
+feign:
+  hystrix:
+    enabled: true
