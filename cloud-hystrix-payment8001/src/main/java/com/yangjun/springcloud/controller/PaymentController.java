@@ -23,6 +23,12 @@ public class PaymentController {
     private String serverPort;
 
     @GetMapping("/payment/hystirx/getok/{id}")
+    @HystrixCommand(fallbackMethod="fallBackTimeOut  ", commandProperties = {
+            @HystrixProperty(name="circuitBreaker.enabled", value="true"),//是否开启断路器
+            @HystrixProperty(name="circuitBreaker.requestVolumeThreshold", value="10"),//请求次数
+            @HystrixProperty(name="circuitBreaker.sleepWindowInMilliseconds", value="10000"),//时间窗口期
+            @HystrixProperty(name="circuitBreaker.errorThresholdPercentage", value="60")//失败率达到多少后跳闸
+    })
     public String paymentInfoOk(@PathVariable("id") Integer id){
         return paymentService.paymentInfoOk(id) + serverPort;
     }
