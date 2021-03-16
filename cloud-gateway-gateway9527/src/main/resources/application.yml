@@ -1,0 +1,19 @@
+server:
+  port: 9527
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: auth
+          uri: lb://cloud-payment-service
+          predicates:
+            - Path=/payment/**
+      discovery:
+        locator:
+          enabled: true
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka001.com:7001/eureka
