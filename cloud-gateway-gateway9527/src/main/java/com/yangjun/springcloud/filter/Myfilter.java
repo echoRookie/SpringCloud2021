@@ -16,13 +16,11 @@ import reactor.core.publisher.Mono;
 public class Myfilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-
         String name = exchange.getRequest().getQueryParams().getFirst("name");
         if(name == null){
             exchange.getResponse().setStatusCode(HttpStatus.NOT_ACCEPTABLE);
             return  exchange.getResponse().setComplete();
         }
-
         return chain.filter(exchange);
     }
 
