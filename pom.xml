@@ -20,6 +20,7 @@
         <module>cloud-hystrix-payment8001</module>
         <module>cloud-consumerhystrix-order80</module>
         <module>cloud-gateway-gateway9527</module>
+        <module>cloudalibaba-provider-payment9001</module>
     </modules>
     <packaging>pom</packaging>
     <!-- packaging pom 总工程-->
@@ -39,6 +40,13 @@
     <!--子模块继承之后，提供作用：锁定版本+子module不用写groupId和version-->
     <dependencyManagement><!--定义规范，但不导入-->
         <dependencies>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.1.0.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
